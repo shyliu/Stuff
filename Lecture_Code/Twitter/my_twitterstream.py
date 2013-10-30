@@ -9,15 +9,16 @@ import urllib2 as urllib
 
 ###########################################################################
 ## Fill these in using the README instructions
-access_token_key = "zzz999"
-access_token_secret = "zzz999"
-consumer_key = "zzz999"
-consumer_secret = "zzz999"
+access_token_key = "1256275837-1pEbWEwFkyqen4roKXYnnAp99MRaoM8IgK5OL9r"
+access_token_secret = "Wcbttaa02J0XhXEJXd7zhiKrVPPPXK24TPCau23A"
+consumer_key = "v1YtuwbPX6cLMrBDonww"
+consumer_secret = "puAwz9vksDbpgntqy2xuIogtc965RxPxEYkbkI5Tjs"
 ###########################################################################
 
 _debug = 0
 
-oauth_token    = oauth.Token(key=access_token_key, secret=access_token_secret)
+oauth_token    = oauth.Token(key=access_token_key, 
+                 secret=access_token_secret)
 oauth_consumer = oauth.Consumer(key=consumer_key, secret=consumer_secret)
 
 signature_method_hmac_sha1 = oauth.SignatureMethod_HMAC_SHA1()
