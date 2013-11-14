@@ -1,0 +1,18 @@
+##construct a table to load data
+CREATE EXTERNAL TABLE thetable (group INT,observation FLOAT)
+ROW FORMAT DELIMITED FIELDS TERMINATED BY '\t' STORED AS TEXTFILE;
+
+##construct two tables to compute within-group means and variances
+CREATE TABLE mymean(g INT, mean FLOAT);
+CREATE TABLE myvar(g INT, var FLOAT);
+
+##input data into the table
+LOAD DATA INPATH '/user/hadoop/prob3_data/groups.txt' OVERWRITE INTO TABLE thetable;
+
+##calcualte within-group mean and within-group variance
+INSERT OVERWRITE TABLE mymean SELECT group, AVG(observation) FROM thetable GROUP BY group;
+INSERT OVERWRITE TABLE myvar SELECT group, VARIANCE (observation) FROM thetable GROUP BY group;
+
+##save tables for mean and variance to hadoop
+insert overwrite local directory '/home/hadoop/AVG/' select mean from mymean ;
+insert overwrite local directory '/home/hadoop/VARIANCE/' select var from myvar;
